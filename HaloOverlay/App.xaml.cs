@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HaloOverlay.WPF.KeyboardHelper;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,6 @@ namespace HaloOverlay
     /// </summary>
     public partial class App : Application
     {
+       
     }
 }

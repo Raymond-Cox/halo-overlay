@@ -5,10 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HaloOverlay"
         mc:Ignorable="d"
-        Title="Halo Overlay" MinWidth="{DynamicResource {x:Static SystemParameters.PrimaryScreenWidthKey}}" MinHeight="{DynamicResource {x:Static SystemParameters.PrimaryScreenHeightKey}}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Focusable="False" WindowStyle="None" Topmost="True" Background="{x:Null}" Foreground="{x:Null}" AllowsTransparency="True">
-    <Window.InputBindings>
-        <KeyBinding Command="{Binding f5Command}" Key="F5"></KeyBinding>
-    </Window.InputBindings>
+        Title="Halo Overlay" MinWidth="{DynamicResource {x:Static SystemParameters.PrimaryScreenWidthKey}}" MinHeight="{DynamicResource {x:Static SystemParameters.PrimaryScreenHeightKey}}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Focusable="True" WindowStyle="None" Topmost="True" Background="Transparent" Foreground="Transparent" AllowsTransparency="True">
     <Border x:Name="outerBorder" BorderBrush="#FF00B9FF" BorderThickness="3" HorizontalAlignment="Center" Height="60" VerticalAlignment="Top" Width="1200" CornerRadius="0,0,40,40" Margin="0,20,0,0" Background="#CC3081B0">
         <Grid x:Name="grid" HorizontalAlignment="Center" VerticalAlignment="Top" Height="90">
             <Grid.ColumnDefinitions>
@@ -23,12 +20,12 @@
                     <DropShadowEffect Direction="300" Opacity="0.6" ShadowDepth="2"/>
                 </Image.Effect>
             </Image>
-            <Image x:Name="f1Image" HorizontalAlignment="Right" Height="90" VerticalAlignment="Top" Panel.ZIndex="1" Source=".\images\F1.png" Width="50" Margin="0,3,30,0" OpacityMask="#CCFFFFFF" Visibility="Hidden">
+            <Image x:Name="f1Image" HorizontalAlignment="Right" Height="90" VerticalAlignment="Top" Panel.ZIndex="1" Source=".\images\F1.png" Width="50" Margin="0,3,30,0" OpacityMask="#CCFFFFFF">
                 <Image.Effect>
                     <DropShadowEffect Direction="300" Opacity="0.6"/>
                 </Image.Effect>
             </Image>
-            <TextBlock x:Name="f1Timer" Text="Test" VerticalAlignment="Top" Width="75" HorizontalAlignment="Right" Margin="0,-3,15,0" Height="55" FontSize="36" Foreground="#CCFFFFFF" />
+            <Label x:Name="f1Timer" Content="" VerticalAlignment="Top" Width="75" HorizontalAlignment="Right" Margin="0,-3,15,0" Height="55" FontSize="36" Foreground="#CCFFFFFF" />
             <Border BorderBrush="#FF00B9FF" BorderThickness="2" HorizontalAlignment="Right" Height="{Binding ActualHeight, ElementName=outerBorder, Mode=OneWay}" Width="3" VerticalAlignment="Top"/>
             <!-- Column 2-->
             <Image x:Name="swordImage" HorizontalAlignment="Left" Height="70" VerticalAlignment="Center" Panel.ZIndex="1" Source=".\images\energy-sword.png" Margin="20,0,0,35" UseLayoutRounding="False" Width="160" Grid.Column="1">
@@ -41,6 +38,7 @@
                     <DropShadowEffect Direction="300" Opacity="0.6"/>
                 </Image.Effect>
             </Image>
+            <Label x:Name="f2Timer" Content="" Width="75" HorizontalAlignment="Right" Margin="0,-3,15,0" FontSize="36" Foreground="#CCFFFFFF" Height="55" VerticalAlignment="Top" Grid.Column="1" />
             <Border BorderBrush="#FF00B9FF" BorderThickness="2" HorizontalAlignment="Right" Height="{Binding ActualHeight, ElementName=outerBorder, Mode=OneWay}" Width="3" VerticalAlignment="Top" Grid.Column="1"/>
             <!-- Column 3-->
             <Image x:Name="sniperImage" HorizontalAlignment="Left" Height="70" VerticalAlignment="Center" Panel.ZIndex="1" Source=".\images\sniper-rifle.png" Margin="30,0,0,35" UseLayoutRounding="False" Width="160" Grid.Column="2">
@@ -53,6 +51,7 @@
                     <DropShadowEffect Direction="300" Opacity="0.6"/>
                 </Image.Effect>
             </Image>
+            <Label x:Name="f3Timer" Content="" VerticalAlignment="Top" Width="75" HorizontalAlignment="Right" Margin="0,-3,15,0" Height="56" FontSize="36" Foreground="#CCFFFFFF" Grid.Column="2" />
             <Border BorderBrush="#FF00B9FF" BorderThickness="2" HorizontalAlignment="Right" Height="{Binding ActualHeight, ElementName=outerBorder, Mode=OneWay}" Width="3" VerticalAlignment="Top" Grid.Column="2"/>
             <!-- Column 4-->
             <Image x:Name="rocketImage" HorizontalAlignment="Left" Height="70" VerticalAlignment="Center" Panel.ZIndex="1" Source=".\images\rocket-launcher.png" Margin="20,0,0,35" UseLayoutRounding="False" Width="150" Grid.Column="3">
@@ -65,6 +64,7 @@
                     <DropShadowEffect Direction="300" Opacity="0.6"/>
                 </Image.Effect>
             </Image>
+            <Label x:Name="f4Timer" Content="" VerticalAlignment="Top" Width="75" HorizontalAlignment="Right" Margin="0,-3,36,0" Height="55" FontSize="36" Foreground="#CCFFFFFF" Grid.Column="3" />
 
         </Grid>
     </Border>
