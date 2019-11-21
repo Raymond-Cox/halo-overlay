@@ -4,6 +4,25 @@
              xmlns:local="clr-namespace:HaloOverlay"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="MyButton" TargetType="{x:Type Button}">
+                <Setter Property="OverridesDefaultStyle" Value="True" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="5" Background="{TemplateBinding Background}" />
+                        <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.6" />
+                                <Setter TargetName="border" Property="BorderThickness" Value="1" />
+                                <!--<Setter TargetName="border" Property="CornerRadius" Value="2" />-->
+                            </Trigger>
+                            </ControlTemplate.Triggers>
+                            
+                    </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            
+        </Style>
     </Application.Resources>
 </Application>

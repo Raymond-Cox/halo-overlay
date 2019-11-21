@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using System.Windows.Media;
+using System.Windows.Controls;
+using System.Media;
+using System.IO;
+using System.Reflection;
 
 namespace HaloOverlay
 {
@@ -51,6 +54,7 @@ namespace HaloOverlay
         private const uint VK_F2 = 0x71;
         private const uint VK_F3 = 0x72;
         private const uint VK_F4 = 0x73;
+        private const uint VK_F10 = 0x79;
 
         public MainWindow()
         {
@@ -67,10 +71,11 @@ namespace HaloOverlay
             _source = HwndSource.FromHwnd(_windowHandle);
             _source.AddHook(HwndHook);
 
-            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F1); //CTRL + CAPS_LOCK
-            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F2); //CTRL + CAPS_LOCK
-            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F3); //CTRL + CAPS_LOCK
-            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F4); //CTRL + CAPS_LOCK
+            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F1);
+            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F2);
+            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F3);
+            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F4);
+            RegisterHotKey(_windowHandle, HOTKEY_ID, MOD_NONE, VK_F10);
             WindowsServices.SetWindowExTransparent(_windowHandle);
         }
         private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -99,6 +104,10 @@ namespace HaloOverlay
                             {
                                 handleF4Timer();
                             }
+                            if (vkey == VK_F10)
+                            {
+                                togglePopup();
+                            }
                             handled = true;
                             break;
                     }
@@ -118,32 +127,36 @@ namespace HaloOverlay
         DispatcherTimer f2dt = new DispatcherTimer();
         DispatcherTimer f3dt = new DispatcherTimer();
         DispatcherTimer f4dt = new DispatcherTimer();
-        static int f1timeStartInt = 120;
-        static int f2timeStartInt = 180;
-        static int f3timeStartInt = 180;
-        static int f4timeStartInt = 180;
-        private int f1time = f1timeStartInt;
-        private int f2time = f2timeStartInt;
-        private int f3time = f3timeStartInt;
-        private int f4time = f4timeStartInt;
+        private int f1time;
+        private int f2time;
+        private int f3time;
+        private int f4time;
         private bool f1active = false;
         private bool f2active = false;
         private bool f3active = false;
         private bool f4active = false;
 
+
+        public int shotgunTimer = 120;
+        public int swordTimer = 120;
+        public int sniperTimer = 180;
+        public int rocketTimer = 180;        
+
+        
         private void handleF1Timer()
         {
-            if(!f1active)
+            if (!f1active)
             {
                 f1Image.Visibility = Visibility.Hidden;
                 f1active = true;
-            f1time = f1timeStartInt;
-            setF1Content();
-            f1dt = new DispatcherTimer();
-            f1dt.Interval = TimeSpan.FromSeconds(1);
-            f1dt.Tick += F1dt_Tick;
-            f1dt.Start();
-            } else
+                f1time = shotgunTimer;
+                setF1Content();
+                f1dt = new DispatcherTimer();
+                f1dt.Interval = TimeSpan.FromSeconds(1);
+                f1dt.Tick += F1dt_Tick;
+                f1dt.Start();
+            }
+            else
             {
                 f1dt.Stop();
                 f1Timer.Content = "";
@@ -181,6 +194,14 @@ namespace HaloOverlay
             {
                 f1Timer.Foreground = new SolidColorBrush(Colors.Red);
             }
+            if(f1time == 30 && warningCheckBox.IsChecked == true)
+            {
+                playWarningSound("shotgunWarning");
+            }
+            if(f1time == 0 && alertCheckBox.IsChecked == true)
+            {
+                playWarningSound("shotgunAlert");
+            }
         }
 
 
@@ -191,7 +212,7 @@ namespace HaloOverlay
             {
                 f2Image.Visibility = Visibility.Hidden;
                 f2active = true;
-                f2time = f2timeStartInt;
+                f2time = swordTimer;
                 setF2Content();
                 f2dt = new DispatcherTimer();
                 f2dt.Interval = TimeSpan.FromSeconds(1);
@@ -236,6 +257,14 @@ namespace HaloOverlay
             {
                 f2Timer.Foreground = new SolidColorBrush(Colors.Red);
             }
+            if (f2time == 30 && warningCheckBox.IsChecked == true)
+            {
+                playWarningSound("swordWarning");
+            }
+            if (f2time == 0 && alertCheckBox.IsChecked == true)
+            {
+                playWarningSound("swordAlert");
+            }
         }
 
         private void handleF3Timer()
@@ -244,7 +273,7 @@ namespace HaloOverlay
             {
                 f3Image.Visibility = Visibility.Hidden;
                 f3active = true;
-                f3time = f3timeStartInt;
+                f3time = sniperTimer;
                 setF3Content();
                 f3dt = new DispatcherTimer();
                 f3dt.Interval = TimeSpan.FromSeconds(1);
@@ -289,6 +318,14 @@ namespace HaloOverlay
             {
                 f3Timer.Foreground = new SolidColorBrush(Colors.Red);
             }
+            if (f3time == 30 && warningCheckBox.IsChecked == true)
+            {
+                playWarningSound("sniperWarning");
+            }
+            if (f3time == 0 && alertCheckBox.IsChecked == true)
+            {
+                playWarningSound("sniperAlert");
+            }
         }
 
         private void handleF4Timer()
@@ -297,7 +334,7 @@ namespace HaloOverlay
             {
                 f4Image.Visibility = Visibility.Hidden;
                 f4active = true;
-                f4time = f3timeStartInt;
+                f4time = rocketTimer;
                 setF4Content();
                 f4dt = new DispatcherTimer();
                 f4dt.Interval = TimeSpan.FromSeconds(1);
@@ -342,6 +379,207 @@ namespace HaloOverlay
             {
                 f4Timer.Foreground = new SolidColorBrush(Colors.Red);
             }
+            if (f4time == 30 && warningCheckBox.IsChecked == true)
+            {
+                playWarningSound("rocketsWarning");
+            }
+            if (f4time == 0 && alertCheckBox.IsChecked == true)
+            {
+                playWarningSound("rocketsAlert");
+            }
+        }
+        private void togglePopup()
+        {
+            mapPopup.IsOpen = !mapPopup.IsOpen;
+        }
+        public bool alertCheck = true;
+        private void alertCheckChanged(object sender, RoutedEventArgs e)
+        {
+            alertCheck = !alertCheck;
+        }
+        public bool warningCheck = true;
+        private void warningCheckChanged(object sender, RoutedEventArgs e)
+        {
+            warningCheck = !warningCheck;
+        }
+        private void playWarningSound(string soundName)
+        {
+            string appFolderPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string fileName = "sounds/" + soundName + ".wav";
+            string filePath = Path.Combine(
+            Directory.GetParent(appFolderPath).Parent.FullName, fileName);
+            Console.WriteLine(filePath);
+                    SoundPlayer player = new SoundPlayer(filePath);
+
+                    player.Load();
+                    player.Play();
+        }
+
+        public Button selectedButton;
+
+        private void mapSelection(object sender, RoutedEventArgs e)
+        {
+            if(selectedButton != null)
+            {
+                selectedButton.BorderThickness = new Thickness(0);
+            }
+            clearAllTimers();
+            selectedButton = (sender as Button);
+            string name = selectedButton.Name.ToString();
+            int[] mapTimers = getMapTimers(name);
+            shotgunTimer = mapTimers[0];
+            swordTimer = mapTimers[1];
+            sniperTimer = mapTimers[2];
+            rocketTimer = mapTimers[3];
+            selectedButton.BorderThickness = new Thickness(3);
+        }
+        private int[] getMapTimers(string mapName)
+        {
+            switch (mapName) {
+                case "BoardwalkBtn":
+                    // No sword - plasma launcher 3 min
+                   return new int[] {120, 180, 120, 180};
+                case "BoneyardBtn":
+                    //Validate Shotgun/Sword
+                    return new int[] { 90, 120, 180, 180 };
+                case "AsylumBtn":
+                    // No Rockets
+                    return new int[] { 90, 90, 90, 90 };
+                case "TheCageBtn":
+                    // No sword/rockets
+                    return new int[] { 60, 60, 75, 90 };
+                case "CountdownBtn":
+                    // No sniper/rockets
+                    return new int[] { 180, 180, 180, 180 };
+                case "HemorrhageBtn":
+                    // Validate Shotgun/Sword/Rockets
+                    return new int[] { 90, 90, 120, 180 };
+                case "ParadisoBtn":
+                    // Validate Shotgun/Sword/Rockets
+                    return new int[] { 120, 120, 180, 180 };
+                case "PinnacleBtn":
+                    // No Sword
+                    return new int[] { 180, 180, 180, 180 };
+                case "PowerhouseBtn":
+                    // No Sword, maybe use Grav hammer/Grenade Launcher - 2min/90sec respectively
+                    return new int[] { 180, 120, 180, 180 };
+                case "ReflectionBtn":
+                    // Should all be correct
+                    return new int[] { 180, 180, 180, 180 };
+                case "SpireBtn":
+                    // Validate Shotgun/Sword, consider including vehicles
+                    return new int[] { 90, 90, 120, 120 };
+                case "SwordBaseBtn":
+                    // No sniper, concussion rifle instead of rockets
+                    return new int[] { 120, 120, 180, 180 };
+                case "ZealotBtn":
+                    // No shotgun/Sniper/Rockets. Concussion Rifle as rockets
+                    return new int[] { 120, 120, 120, 180 };
+                default:
+                    return new int[] { 31, 31, 31, 31 };
+            }
+
+        }
+        private void clearAllTimers()
+        {
+            f1dt.Stop();
+            f1Timer.Content = "";
+            f1Image.Visibility = Visibility.Visible;
+            f1active = false;
+            f2dt.Stop();
+            f2Timer.Content = "";
+            f2Image.Visibility = Visibility.Visible;
+            f2active = false;
+            f3dt.Stop();
+            f3Timer.Content = "";
+            f3Image.Visibility = Visibility.Visible;
+            f3active = false;
+            f4dt.Stop();
+            f4Timer.Content = "";
+            f4Image.Visibility = Visibility.Visible;
+            f4active = false;
         }
     }
+
+
+
+    class timerObject {
+        public int initialTime, currentTime;
+        public Label label;
+        public Image image;
+        public DispatcherTimer dt = new DispatcherTimer();
+        public bool active = false;
+        
+        public timerObject(int initTime, Label lab, Image img)
+        {
+            initialTime = initTime;
+            label = lab;
+            image = img;
+        }
+        public void handleTimer()
+        {
+            if (!active)
+            {
+                
+                image.Visibility = Visibility.Hidden;
+                active = true;
+                currentTime = initialTime;
+                setContent();
+                dt = new DispatcherTimer();
+                dt.Interval = TimeSpan.FromSeconds(1);
+                dt.Tick += dt_Tick;
+                dt.Start();
+            }
+            else
+            {
+                dt.Stop();
+                label.Content = "";
+                image.Visibility = Visibility.Visible;
+                active = false;
+            }
+        }
+        private void dt_Tick(object sender, EventArgs e)
+        {
+            currentTime--;
+            setContent();
+        }
+        private void setContent()
+        {
+            TimeSpan time = TimeSpan.FromSeconds(currentTime);
+            label.Content = time.ToString(@"m\:ss");
+            if (currentTime == 0)
+            {
+                label.Foreground = new SolidColorBrush(Colors.LimeGreen);
+                label.Content = "LIVE";
+                dt.Stop();
+                active = false;
+            }
+            else if (currentTime >= 60)
+            {
+                label.Foreground = new SolidColorBrush(Colors.White);
+            }
+            else if (currentTime < 60 && currentTime > 30)
+            {
+                label.Foreground = new SolidColorBrush(Colors.Yellow);
+            }
+            else if (currentTime <= 30)
+            {
+                label.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
+    }
+    // Main Method 
+    //public timerObject[] GenerateArray()
+    //{
+    //    // To declare an array of two objects 
+    //    timerObject[] timerArray = new timerObject[4];
+
+    //    // Initialize the objects 
+    //    timerArray[0] = new timerObject(shotgunTimer, f1Timer, f1Image);
+    //    timerArray[1] = new timerObject(swordTimer, f2Timer, f2Image);
+    //    timerArray[2] = new timerObject(sniperTimer, f3Timer, f3Image);
+    //    timerArray[3] = new timerObject(rocketTimer, f4Timer, f4Image);
+
+    //    return timerArray;
+    //}
 }

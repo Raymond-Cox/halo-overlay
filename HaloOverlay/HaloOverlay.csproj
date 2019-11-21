@@ -181,5 +181,56 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gametitles\reachBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\gametitles\reachBackground2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\HaloReach-Anchor9.jpg" />
+    <Resource Include="images\maps\HaloReach-Asylum.jpg" />
+    <Resource Include="images\maps\HaloReach-Boardwalk.jpg" />
+    <Resource Include="images\maps\HaloReach-Boneyard.jpg" />
+    <Resource Include="images\maps\HaloReach-Breakpoint.jpg" />
+    <Resource Include="images\maps\HaloReach-Condemned.jpg" />
+    <Resource Include="images\maps\HaloReach-Countdown.jpg" />
+    <Resource Include="images\maps\HaloReach-Hemorrhage.jpg" />
+    <Resource Include="images\maps\HaloReach-Highlands.jpg" />
+    <Resource Include="images\maps\HaloReach-Paradiso.jpg" />
+    <Resource Include="images\maps\HaloReach-Pinnacle.jpg" />
+    <Resource Include="images\maps\HaloReach-Powerhouse.jpg" />
+    <Resource Include="images\maps\HaloReach-Reflection.jpg" />
+    <Resource Include="images\maps\HaloReach-Spire.jpg" />
+    <Resource Include="images\maps\HaloReach-SwordBase.jpg" />
+    <Resource Include="images\maps\HaloReach-Tempest.jpg" />
+    <Resource Include="images\maps\HaloReach-TheCage.jpg" />
+    <Resource Include="images\maps\HaloReach-Uncaged.jpg" />
+    <Resource Include="images\maps\HaloReach-Zealot.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sounds\rocketsAlert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\rocketsWarning.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\shotgunAlert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="sounds\shotgunWarning.wav" />
+    <Content Include="sounds\sniperAlert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\sniperWarning.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\swordAlert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\swordWarning.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
