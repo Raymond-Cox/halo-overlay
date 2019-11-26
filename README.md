@@ -1,4 +1,4 @@
-# halo-overlay
+# Halo-Overlay
 
 ## Instructions
 1.) Download zip-file from https://drive.google.com/file/d/1Vq7x35_8zPBCJHOmNTkTwn2RVX41YgVJ/view?usp=sharing
