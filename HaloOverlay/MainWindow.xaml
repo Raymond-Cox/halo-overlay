@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HaloOverlay"
         mc:Ignorable="d"
         Title="Halo Overlay" MinWidth="{DynamicResource {x:Static SystemParameters.PrimaryScreenWidthKey}}" MinHeight="{DynamicResource {x:Static SystemParameters.PrimaryScreenHeightKey}}" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Focusable="True" WindowStyle="None" Topmost="True" Background="Transparent" Foreground="Transparent" AllowsTransparency="True">
-    <Border x:Name="outerBorder" BorderBrush="#FF00B9FF" BorderThickness="3" HorizontalAlignment="Center" Height="60" VerticalAlignment="Top" Width="1200" CornerRadius="0,0,40,40" Margin="0,20,0,0" Background="#CC3081B0">
+    <Border x:Name="outerBorder" BorderBrush="#FF00B9FF" BorderThickness="3" HorizontalAlignment="Center" Height="60" VerticalAlignment="Top" Width="1200" CornerRadius="0,0,40,40" Margin="0,20,0,0" Background="#CC3081B0" Visibility="Visible">
         <Grid x:Name="grid" HorizontalAlignment="Center" VerticalAlignment="Top" Height="90">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="300"/>
@@ -72,7 +72,7 @@
                VerticalOffset="500"
                AllowsTransparency="True"
                    IsOpen="True">
-                <Border BorderBrush="#FF00B9FF" BorderThickness="3" HorizontalAlignment="Center" Height="800" Width="1200" VerticalAlignment="Center" CornerRadius="20,20,20,20" Background="#CC3081B0">
+                <Border BorderBrush="#FF00B9FF" BorderThickness="3" HorizontalAlignment="Center" Height="800" Width="1200" VerticalAlignment="Center" CornerRadius="20,20,20,20" Background="#FF3081B0">
                     <Grid x:Name="popupGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition MaxWidth="400"/>
@@ -80,13 +80,23 @@
                         </Grid.ColumnDefinitions>
                          <!--Col 1-->
                         <TextBlock Text="Instructions" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Height="34" TextDecorations="Underline" Margin="98,0" />
-                        <TextBlock Text="You can open/close this window at any time with the F10 key.  Begin by selecting a map to load the specific weapon timer values for that map. Use the F1 - F4 keys to begin a timer for the corresponding weapon. F1 - F4 keys on an active timer will end the current timer." Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,10,0" TextWrapping="Wrap" />
-                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="You can open/close this window at any time with the F10 key." Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,10,0" TextWrapping="Wrap" />
+                        <TextBlock Text="Begin by selecting a map to load the specific weapon timer values for that map. Use the F1 - F4 keys to begin a timer for the corresponding weapon. F1 - F4 keys on an active timer will end the current timer." Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,150,10,0" TextWrapping="Wrap" />
+                        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 100, 0, 0">
                         <TextBlock Text="Options" Foreground="White" FontSize="24" HorizontalAlignment="Center" Height="34" TextDecorations="Underline" />
                             <CheckBox Name="warningCheckBox" IsChecked="True" Checked="warningCheckChanged" Unchecked="warningCheckChanged" Margin="5" Foreground="White">Timer Warning (30sec)</CheckBox>
                             <CheckBox Name="alertCheckBox" IsChecked="True" Checked="alertCheckChanged" Unchecked="alertCheckChanged" Margin="5" Foreground="White">Timer Alert (0sec)</CheckBox>
+                            <CheckBox Name="overlayCheckBox" IsChecked="False" Checked="overlayCheckChanged" Unchecked="overlayCheckChanged" Margin="5" Foreground="White" Height="21">Hide Overlay (Remove overlay, still plays timer sounds)</CheckBox>
                         </StackPanel>
-                        <TextBlock FontFamily="Ink Free" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Bottom" MaxWidth="400" Text="Thanks for using Halo Overlay Timers" Foreground="White" TextWrapping="Wrap"/>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0, 0, 0, 25">
+                            <TextBlock FontFamily="Ink Free" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" MaxWidth="400" Text="Thanks for using Halo Overlay Timers!" Foreground="White" TextWrapping="Wrap"/>
+                            <TextBlock FontFamily="Ink Free" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" MaxWidth="400" Foreground="White" TextWrapping="Wrap">
+                                <Hyperlink NavigateUri="https://give.projectsemicolon.com/secure/cause_pdetails/MjM5NjE=" RequestNavigate="Hyperlink_RequestNavigate" Foreground="#FFD1FF00" FontSize="16">
+                                    Donate to suicide prevention through Project(;)
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        
                         
                         <!--Col 2-->
                         <TextBlock Text="Map Selection" Foreground="White" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Height="34" TextDecorations="Underline" Grid.Column="1" />
@@ -312,7 +322,6 @@
                         </Grid>
                     </Grid>
                 </Border>
-                <!--<Button Margin="80">Hide</Button>-->
             </Popup>
         </Grid>
     </Border>

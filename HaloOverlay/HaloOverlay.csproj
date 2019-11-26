@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6CF0B9B7-EF17-4AA5-9BEB-046056E85B19}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>HaloOverlay</RootNamespace>
-    <AssemblyName>HaloOverlay</AssemblyName>
+    <RootNamespace>HaloOverlayTimers</RootNamespace>
+    <AssemblyName>HaloOverlayTimers</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -74,6 +74,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>hotIconv4.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -209,7 +212,17 @@
     <Resource Include="images\maps\HaloReach-Zealot.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Readme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="hotIcon.ico" />
+    <Resource Include="hotIconv2.ico" />
+    <Resource Include="hotIconv3.ico" />
+    <Resource Include="hotIconv4.ico" />
     <Content Include="sounds\rocketsAlert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\rocketsStarted.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="sounds\rocketsWarning.wav">
@@ -218,14 +231,25 @@
     <Content Include="sounds\shotgunAlert.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="sounds\shotgunWarning.wav" />
+    <Content Include="sounds\shotgunStarted.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\shotgunWarning.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="sounds\sniperAlert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\sniperStarted.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="sounds\sniperWarning.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="sounds\swordAlert.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sounds\swordStarted.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="sounds\swordWarning.wav">

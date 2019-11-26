@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HaloOverlay.Properties {
+namespace HaloOverlayTimers.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

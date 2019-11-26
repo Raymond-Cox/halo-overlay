@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Media;
 using System.IO;
 using System.Reflection;
+using System.Diagnostics;
+using System.Windows.Navigation;
 
 namespace HaloOverlay
 {
@@ -155,6 +157,10 @@ namespace HaloOverlay
                 f1dt.Interval = TimeSpan.FromSeconds(1);
                 f1dt.Tick += F1dt_Tick;
                 f1dt.Start();
+                if (overlayCheck)
+                {
+                    playWarningSound("shotgunStarted");
+                }
             }
             else
             {
@@ -218,6 +224,10 @@ namespace HaloOverlay
                 f2dt.Interval = TimeSpan.FromSeconds(1);
                 f2dt.Tick += F2dt_Tick;
                 f2dt.Start();
+                if (overlayCheck)
+                {
+                    playWarningSound("swordStarted");
+                }
             }
             else
             {
@@ -279,6 +289,10 @@ namespace HaloOverlay
                 f3dt.Interval = TimeSpan.FromSeconds(1);
                 f3dt.Tick += F3dt_Tick;
                 f3dt.Start();
+                if (overlayCheck)
+                {
+                    playWarningSound("sniperStarted");
+                }
             }
             else
             {
@@ -340,6 +354,10 @@ namespace HaloOverlay
                 f4dt.Interval = TimeSpan.FromSeconds(1);
                 f4dt.Tick += F4dt_Tick;
                 f4dt.Start();
+                if(overlayCheck)
+                {
+                    playWarningSound("rocketsStarted");
+                }
             }
             else
             {
@@ -402,17 +420,35 @@ namespace HaloOverlay
         {
             warningCheck = !warningCheck;
         }
+        public bool overlayCheck = false;
+        private void overlayCheckChanged(object sender, RoutedEventArgs e)
+        {
+            overlayCheck = !overlayCheck;
+            if(overlayCheck)
+            {
+                outerBorder.Visibility = Visibility.Hidden;
+                warningCheckBox.IsEnabled = false;
+                warningCheckBox.IsChecked = true;
+                alertCheckBox.IsEnabled = false;
+                alertCheckBox.IsChecked = true;
+            } else
+            {
+                outerBorder.Visibility = Visibility.Visible;
+                warningCheckBox.IsEnabled = true;
+                alertCheckBox.IsEnabled = true;
+            }
+        }
         private void playWarningSound(string soundName)
         {
-            string appFolderPath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string appFolderPath = AppDomain.CurrentDomain.BaseDirectory;
             string fileName = "sounds/" + soundName + ".wav";
-            string filePath = Path.Combine(
-            Directory.GetParent(appFolderPath).Parent.FullName, fileName);
+            string filePath = Path.Combine(appFolderPath, fileName);
             Console.WriteLine(filePath);
-                    SoundPlayer player = new SoundPlayer(filePath);
 
-                    player.Load();
-                    player.Play();
+            SoundPlayer player = new SoundPlayer(filePath);
+
+            player.Load();
+            player.Play();
         }
 
         public Button selectedButton;
@@ -498,6 +534,11 @@ namespace HaloOverlay
             f4Timer.Content = "";
             f4Image.Visibility = Visibility.Visible;
             f4active = false;
+        }
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 
