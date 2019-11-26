@@ -1,12 +1,12 @@
 # Halo-Overlay
 
 ## Changelogs
-**1.0.2**
+### **1.0.2**
 - Option to hide visual overlay and only rely on sounds
 - Added Sound files for starting new timer whiile overlay is hidden
 - Added charity donation link
 - Fixed sound filepaths
-**1.0.1**
+### **1.0.1**
 - Added F10 popup window for options/map selection
 - Added dynamic timer durations based on map selection
 - Added sound files to play when timers reach 30s and 0s remaining
