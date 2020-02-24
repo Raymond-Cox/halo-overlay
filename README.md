@@ -1,5 +1,7 @@
 # Halo-Overlay
 
+![Imgur](https://i.imgur.com/eyOM5fv.png)
+
 ## Changelogs
 ### **1.0.2**
 - Option to hide visual overlay and only rely on sounds
